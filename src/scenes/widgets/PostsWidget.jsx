@@ -5,16 +5,24 @@ import BaseUrl from "url/BaseUrl";
 import PostWidget from "./PostWidget";
 
 
-
 const PostsWidget = ({userId,isProfile=false}) =>{
    const dispatch = useDispatch();
    const posts = useSelector((state)=>state.posts);
    const token = useSelector((state)=>state.token);
+ 
+
+   useEffect(()=>{
+    if(isProfile){
+        getUserPosts();
+    }else{
+        getPosts();
+    }
+   },[])
 
    const getPosts = async()=>{
     const response = await fetch(`${BaseUrl}/posts`,{
         method:"GET",
-        headers:{Authoriztion:`Bearer ${token}`},
+        headers:{Authorization:`Bearer ${token}`},
     });
     const data = await response.json();
     dispatch(setPosts({posts:data}))
@@ -23,25 +31,18 @@ const PostsWidget = ({userId,isProfile=false}) =>{
    const getUserPosts = async() =>{
     const response = await fetch(`${BaseUrl}/posts/${userId}/posts`,{
         method:"GET",
-        headers:{Authoriztion:`Bearer ${token}`},
+        headers:{Authorization:`Bearer ${token}`},
     });
     const data = await response.json();
     dispatch(setPosts({posts:data}))
    }
 
-   useEffect(()=>{
-    if(isProfile){
-        getUserPosts();
-    }else{
-        console.log(getPosts())
-        getPosts();
-    }
-   },[])
+  
 
    return(
     <>
-        {posts.map((
-            {
+        {posts.map(
+           ( {
             _id,
             userId,
             firstName,

@@ -51,7 +51,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             sx={{
               "&:hover": {
                 cursor: "pointer",
-                color: palette.primary.light,
+                color: palette.primary.dark,
               },
             }}
           >
@@ -72,7 +72,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         {isFriend ? (
           <PersonRemoveOutlined sx={{ color: primaryDark }} />
         ) : (
-          <PersonAddOutlined sx={{ color: primaryLight }} />
+          <PersonAddOutlined sx={{ color: primaryDark }} />
         )}
       </IconButton>
     </FlexBetween>
