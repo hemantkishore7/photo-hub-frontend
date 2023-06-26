@@ -58,17 +58,17 @@ const PostWidget = ({
     dispatch(setPost({ post: updatedPost }));
   };
 
-  const addComment = async() => {
-    const response = await fetch(`${BaseUrl}/posts/${postId}/comment`,{
-      method:"PUT",
-      headers:{
-        Authorization:`Bearer ${token}`,
+  const addComment = async () => {
+    const response = await fetch(`${BaseUrl}/posts/${postId}/comment`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ userId: loggedInUserId }),
-    })
+    });
     const updatePost = await response.json();
-    dispatch(setPost({post:updatePost}))
+    dispatch(setPost({ post: updatePost }));
   };
 
   return (
@@ -98,8 +98,11 @@ const PostWidget = ({
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
             <IconButton onClick={patchLike}>
-              {isLiked ? (<FavoriteOutlined sx={{color:primary}} />)
-               :( <FavoriteBorderOutlined />)}
+              {isLiked ? (
+                <FavoriteOutlined sx={{ color: primary }} />
+              ) : (
+                <FavoriteBorderOutlined />
+              )}
             </IconButton>
             <Typography>{likeCount}</Typography>
           </FlexBetween>
@@ -128,17 +131,17 @@ const PostWidget = ({
             </Box>
           ))}
           <Box>
-          <TextField
-            m="0.25rem"
-            variant="standard"
-            label="comment"
-            sx={{
-              borderRadius: "5px",
-            }}
-          />
-          <IconButton onClick={addComment}>
-            <SendRounded />
-          </IconButton>
+            <TextField
+              m="0.25rem"
+              variant="standard"
+              label="comment"
+              sx={{
+                borderRadius: "5px",
+              }}
+            />
+            <IconButton onClick={addComment}>
+              <SendRounded />
+            </IconButton>
           </Box>
         </Box>
       )}
