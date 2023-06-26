@@ -33,13 +33,15 @@ const PostsWidget = ({userId,isProfile=false}) =>{
     if(isProfile){
         getUserPosts();
     }else{
+        console.log(getPosts())
         getPosts();
     }
    },[])
 
    return(
     <>
-        {posts.map(({
+        {posts.map((
+            {
             _id,
             userId,
             firstName,
@@ -49,7 +51,7 @@ const PostsWidget = ({userId,isProfile=false}) =>{
             picturePath,
             userPicturePath,
             likes,
-            comments,
+            comments
         })=>(
             <PostWidget
                 key={_id}
@@ -64,9 +66,9 @@ const PostsWidget = ({userId,isProfile=false}) =>{
                 comments={comments}
             />
         )
-        )}
+       ) }
     </>
-   )
+   );
 }
 
 export default PostsWidget;
